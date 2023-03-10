@@ -1,0 +1,11 @@
+.wrapper {
+}
+
+.item {
+    display: flex;
+    padding: 10px 20px;
+}
+
+.item:hover {
+    background-color: beige;
+}
