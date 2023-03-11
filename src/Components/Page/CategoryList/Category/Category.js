@@ -6,18 +6,19 @@ const URL = "http://localhost:8080/event"
 
 const Category = (props) => {
     const [event, setEvent] = useState("")
-    const [desc, setDesc] = useState("")
+    const [sum, setSum] = useState(0)
 
     async function putEvent() {
-        let res = await axios.put(URL, {sum: 1000, description: "desc", categoryid: 1})
+        console.log("putEvent")
+        let data = {sum: Number(sum), description: props.event.Title, category_id: props.event.ID}
+        console.log(props.event)
+
+        let res = await axios.put(URL, data)
     }
 
-    const changeE = (event) => {
-        setEvent(event.target.value)
-    }
-
-    const changeD = (event) => {
-        setDesc(event.target.value)
+    const changeSum = (event) => {
+        console.log("asdfasdfasdf")
+        setSum(event.target.value)
     }
 
     return <div className={styles.wrapper}>
@@ -27,15 +28,19 @@ const Category = (props) => {
         {/*<input className={"my-2 mx-2 py-2 px-4 border"} type="text" value={desc} onChange={*/}
         {/*    (e) => changeD(e)*/}
         {/*}/>*/}
-
         <span className={styles.field}>{props.event.Title}</span>
         <span className={styles.field}>{props.event.Description}</span>
-        <button className={styles.field} onClick={() => {
+        <input type="number" value={sum} className={styles.field} onChange={
+            (e) => {
+                console.log(e.target.value)
+                changeSum(e)
+            }
+        }/>
+        <button className={[styles.field, styles.button].join(" ")} onClick={() => {
             putEvent()
         }}>
             Add
         </button>
-
     </div>
 
 }

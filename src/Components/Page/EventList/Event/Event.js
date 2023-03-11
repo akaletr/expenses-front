@@ -29,9 +29,8 @@ const Event = (props) => {
         {/*    (e) => changeD(e)*/}
         {/*}/>*/}
 
-        <span className={styles.field}>{props.event.Title}</span>
-        <span className={styles.field}>{props.event.Description}</span>
-        <span className={styles.field}> {props.event.Sum}</span>
+        <span className={styles.field}>{props.event.description}</span>
+        <span className={styles.field}> {props.event.sum}</span>
         {/*<button onClick={() => {*/}
         {/*    putEvent()*/}
         {/*    setCount(count + 1)*/}
