@@ -1,11 +1,11 @@
 import Event from "./Event/Event";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import styles from "./EventList.module.css"
+import styles from "./Events.module.css"
 
 const url = "http://localhost:8080/events"
 
-const EventList = (props) => {
+const Events = (props) => {
     async function getEvents() {
         setLoading(true)
         let res = await axios.get(url)
@@ -27,4 +27,4 @@ const EventList = (props) => {
     </div>
 }
 
-export default EventList
+export default Events

@@ -1,0 +1,39 @@
+.wrapper {
+    display: inline-block;
+    width: 200px;
+    height: 150px;
+    margin: 5px;
+
+    background-color: #ececec;
+    border-radius: 15px;
+}
+
+.wrapper:hover {
+    background-color: lightgrey;
+}
+
+.field {
+    display: block;
+    text-align: center;
+}
+
+.input {
+    display: block;
+}
+
+.button {
+    background-color: #ffb9a0;
+    display: block;
+    width: 100px;
+    height: 50px;
+    margin: 4px auto;
+    cursor: pointer;
+    border-radius: 10px;
+
+    text-align: center;
+    line-height: 50px;
+}
+
+.button:hover {
+    background-color: coral;
+}

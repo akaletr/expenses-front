@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import axios from "axios";
-import styles from "./CategoryList.module.css"
+import styles from "./Categories.module.css"
 import Category from "./Category/Category";
 
 const url = "http://localhost:8080/categories"
 
-const CategoryList = (props) => {
+const Categories = () => {
     async function getCategories() {
         setLoading(true)
         let res = await axios.get(url)
@@ -18,13 +18,19 @@ const CategoryList = (props) => {
 
 
     useEffect(() => {
-        getCategories()
+        getCategories().then()
     }, [])
 
     return <div className={styles.wrapper}>
-        {loading && <p>Loading...</p>}
+        {loading && <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Loading...</span>
+            </div>
+        </div>}
         {events.map(event => <Category event = {event}/>)}
     </div>
 }
 
-export default CategoryList
+export default Categories
+
+

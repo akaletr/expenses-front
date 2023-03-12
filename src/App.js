@@ -1,8 +1,8 @@
 import './App.module.css';
 import Header from "./Components/Header/Header";
-import Navigation from "./Components/Navigation/Navigation";
+import Sidebar from "./Components/Sidebar/Sidebar";
 import styles from "./App.module.css"
-import Page from "./Components/Page/Page";
+import Content from "./Components/Content/Content";
 
 function App() {
     return (
@@ -11,10 +11,10 @@ function App() {
                 <Header/>
             </div>
             <div className={styles.nav}>
-                <Navigation/>
+                <Sidebar/>
             </div>
             <div className={styles.page}>
-                <Page/>
+                <Content/>
             </div>
         </div>
     );

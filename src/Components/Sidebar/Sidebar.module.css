@@ -9,3 +9,7 @@
 .item:hover {
     background-color: beige;
 }
+
+.active {
+    background-color: #ececec;
+}

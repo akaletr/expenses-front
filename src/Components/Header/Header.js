@@ -1,7 +1,6 @@
 import styles from "./Header.module.css"
 
-const Header = ()=>
-{
+const Header = () => {
     return <div className={styles.wrapper}>
         EXPENSES
     </div>;

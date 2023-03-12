@@ -9,15 +9,15 @@
 
 .header {
     grid-area: a;
-    border: 1px solid lightgrey;
+    /*border: 1px solid lightgrey;*/
 }
 
 .nav {
     grid-area: b;
-    border: 1px solid lightgrey;
+    /*border: 1px solid lightgrey;*/
 }
 
 .page {
     grid-area: c;
-    border: 1px solid lightgrey;
+    /*border: 1px solid lightgrey;*/
 }
