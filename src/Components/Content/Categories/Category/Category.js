@@ -2,13 +2,13 @@ import {useState} from "react";
 import axios from "axios";
 import styles from "./Category.module.css"
 
-const URL = "http://localhost:8080/event"
+const URL = "http://localhost:8080/v1"
 
 const Category = (props) => {
     const [sum, setSum] = useState(0)
 
     async function putEvent() {
-        let data = {sum: Number(sum), description: props.event.title, category_id: props.event.ID}
+        let data = {sum: Number(sum), description: props.event?.title, category_id: props.event?.ID}
         let res = await axios.put(URL, data).then(() => setSum(0))
     }
 
