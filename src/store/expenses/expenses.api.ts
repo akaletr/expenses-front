@@ -1,4 +1,6 @@
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
+import {Response, Request, IUserParams} from "../../models/models";
+import {IUser} from "../../models/user";
 
 export const expensesApi = createApi({
     reducerPath: "expenses/api",
@@ -6,20 +8,21 @@ export const expensesApi = createApi({
         baseUrl: "http://localhost:8080"
     }),
     endpoints: build => ({
-        getUser: build.query<any, any>({
+        getUser: build.query<Response<IUser>, Request<IUserParams>>({
             query: (search) => ({
                 url: "v1",
                 method:"POST",
-                body: {
-                    id:"23",
-                    method:"user.get",
-                    params:{
-                        id:search
-                    }
-                }
+                body: search
             })
-        })
+        }),
+        category: build.query<Response<any>, Request<any>>({
+            query: (search) => ({
+                url: "v1",
+                method:"POST",
+                body: search
+            })
+        }),
     })
 })
 
-export const {useGetUserQuery} = expensesApi
+export const {useGetUserQuery, useLazyCategoryQuery} = expensesApi
