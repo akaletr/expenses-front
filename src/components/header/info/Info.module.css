@@ -1,0 +1,11 @@
+.wrapper {
+    display: inline-block;
+}
+
+.field {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 3px;
+    cursor: pointer;
+}
