@@ -1,0 +1,14 @@
+.wrapper {
+    display: inline-block;
+}
+
+.link {
+    display: inline-block;
+    color: white;
+    text-decoration: none;
+    padding: 10px 10px;
+}
+
+.link:hover {
+    color: #c7c7c7;
+}

@@ -4,10 +4,10 @@ import {useEffect, useState} from "react";
 import {configureStore} from "@reduxjs/toolkit";
 import {useActions} from "../hooks/action";
 import {useAppSelector} from "../hooks/redux";
+import s from "./HomePage.module.css"
 
 export function HomePage() {
     const [fetchCategory, {data: category}] = useLazyCategoryQuery()
-
     const {user} = useAppSelector(state => state.expenses)
     const {setTitle} = useActions()
 
@@ -32,15 +32,6 @@ export function HomePage() {
 
 
     return <div>
-        {user && <>
-            <span>{user.first_name}</span>
-            <span>{user.last_name}</span>
-            <span>{user.wallet_id}</span>
-            <span>{user.email}</span>
-            <button onClick={() => clickHandler(user.ID)}>Посмотреть</button>
-        </>}
-        {category && <>
-            <span>{category.result.title}</span>
-        </>}
+
     </div>
 }

@@ -3,11 +3,13 @@ import {IUser} from "../../models/user";
 import {IUserParams} from "../../models/models";
 
 interface ExpensesState {
+    auth: boolean
     title: string
     user: IUser
 }
 
 const initialState: ExpensesState = {
+    auth: false,
     title: "",
     user: {
         ID: 0,
