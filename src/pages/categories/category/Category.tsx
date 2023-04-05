@@ -1,12 +1,16 @@
 import {ICategory} from "../../../models/category";
 import s from "./Category.module.css"
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {useLazyWalletsQuery, useWalletQuery} from "../../../store/expenses/expenses.api";
+import {useActions} from "../../../hooks/action";
 
 
 export function Category(c: ICategory) {
     const [ready, setReady] = useState(true)
     const [input, setInput] = useState("")
-    const [btn, setBtn] = useState(false)
+
+    const [fetchWallet, {data: wallet}] = useLazyWalletsQuery()
+    const {setWallet} = useActions()
 
     const onCardClick = () => {
         setReady(false)
@@ -17,7 +21,7 @@ export function Category(c: ICategory) {
             id: "header",
             method: "event.create",
             params: {
-                category_id: 2,
+                category_id: c.ID,
                 description: c.title,
                 sum: Number(input)
             }
@@ -26,10 +30,25 @@ export function Category(c: ICategory) {
         fetch("http://localhost:8080/v1", {
             method: "POST",
             body: JSON.stringify(query)
-        }).then(res => res.json()).then(res => console.log(res))
-        setBtn(true)
+        }).then(res => res.json()).then(res => console.log(res)).then(() => {
+            const walletQuery = {
+                id: "wallet",
+                method: "wallet.getmany",
+                params: {
+                    ID: 1
+                }
+            }
+
+            fetchWallet(walletQuery).then((res) => {
+                console.log(res)
+                setWallet(res.data!.result)
+            })
+
+        })
+
         setInput("")
         setReady(true)
+
     }
 
     const onInput = (e: { target: any; }) => {

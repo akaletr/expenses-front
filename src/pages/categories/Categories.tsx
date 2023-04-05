@@ -1,7 +1,6 @@
 import {useCategoryQuery} from "../../store/expenses/expenses.api";
 import {Category} from "./category/Category";
 import s from "./Categories.module.css"
-import {useState} from "react";
 
 export function Categories() {
     const query = {

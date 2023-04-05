@@ -1,12 +1,16 @@
 import {useAppSelector} from "../hooks/redux";
 
 export function Profile() {
-    const store = useAppSelector(state => state.expenses)
+    const user = useAppSelector(state => state.expenses.user)
+    const wallet = useAppSelector(state => state.expenses.wallet)
 
     return <div>
-        <div> {store.user?.first_name}</div>
-        <div> {store.user?.last_name}</div>
-        <div> {store.user?.email}</div>
-        <div> {store.user?.ID}</div>
+        <div> {user?.first_name}</div>
+        <div> {user?.last_name}</div>
+        <div> {user?.email}</div>
+        <div> {user?.ID}</div>
+        <h2>Sum</h2>
+        <div> {wallet[0].name}</div>
+        <div> {wallet[0].sum}</div>
     </div>
 }
