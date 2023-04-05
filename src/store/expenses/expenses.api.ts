@@ -3,6 +3,7 @@ import {Response, Request, IUserParams} from "../../models/models";
 import {IUser} from "../../models/user";
 import {ICategory} from "../../models/category";
 import {IEvent} from "../../models/event";
+import {IWallet} from "../../models/wallet";
 
 export const expensesApi = createApi({
     reducerPath: "expenses/api",
@@ -12,13 +13,6 @@ export const expensesApi = createApi({
     endpoints: build => ({
         auth: build.query<any, any>({
             query: (search) => ({
-                mode: 'no-cors',
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'application/json',
-                },
-                withCredentials: true,
-                credentials: 'same-origin',
                 url: "v1/auth",
                 method:"POST",
                 body: search
@@ -40,13 +34,20 @@ export const expensesApi = createApi({
         }),
         category: build.query<Response<ICategory[]>, Request<any>>({
             query: (search) => ({
-                mode: 'no-cors',
-                headers: {
-                    'Access-Control-Allow-Origin': '*',
-                    'Content-Type': 'application/json',
-                },
-                withCredentials: true,
-                credentials: 'same-origin',
+                url: "v1",
+                method:"POST",
+                body: search
+            })
+        }),
+        wallet: build.query<Response<IWallet>, Request<any>>({
+            query: (search) => ({
+                url: "v1",
+                method:"POST",
+                body: search
+            })
+        }),
+        wallets: build.query<Response<IWallet[]>, Request<any>>({
+            query: (search) => ({
                 url: "v1",
                 method:"POST",
                 body: search
@@ -56,6 +57,10 @@ export const expensesApi = createApi({
 })
 
 export const {
+    useWalletQuery,
+    useWalletsQuery,
+    useLazyWalletQuery,
+    useLazyWalletsQuery,
     useEventQuery,
     useLazyEventQuery,
     useGetUserQuery,
