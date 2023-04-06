@@ -1,7 +1,7 @@
 import {ICategory} from "../../../models/category";
 import s from "./Category.module.css"
-import {useEffect, useState} from "react";
-import {useLazyWalletsQuery, useWalletQuery} from "../../../store/expenses/expenses.api";
+import {useState} from "react";
+import {useLazyActionQuery, useLazySubWalletsQuery, useLazyWalletQuery} from "../../../store/expenses/expenses.api";
 import {useActions} from "../../../hooks/action";
 
 
@@ -9,54 +9,56 @@ export function Category(c: ICategory) {
     const [ready, setReady] = useState(true)
     const [input, setInput] = useState("")
 
-    const [fetchWallet, {data: wallet}] = useLazyWalletsQuery()
+    const [fetchSubWallets, {data: subWallets}] = useLazySubWalletsQuery()
+    const [fetchWallet, {data: wallet}] = useLazyWalletQuery()
+    const [fetchAction] = useLazyActionQuery()
+
     const {setWallet} = useActions()
+    const {setSubWallets} = useActions()
 
     const onCardClick = () => {
         setReady(false)
     }
 
-    const onButtonClick = (e: any) => {
-        const query = {
+    const onButtonClick = () => {
+        const eventQuery = {
             id: "header",
-            method: "event.create",
+            method: "action.event",
             params: {
                 category_id: c.ID,
+                sub_wallet_id: 2,
                 description: c.title,
                 sum: Number(input)
             }
         }
+        fetchAction(eventQuery)
 
-        fetch("http://localhost:8080/v1", {
-            method: "POST",
-            body: JSON.stringify(query)
-        }).then(res => res.json()).then(res => console.log(res)).then(() => {
-            const walletQuery = {
-                id: "wallet",
-                method: "wallet.getmany",
-                params: {
-                    ID: 1
-                }
+        let walletQuery = {
+            id: "wallet",
+            method: "wallet.get",
+            params: {}
+        }
+        fetchWallet(walletQuery)
+
+
+        const subWalletQuery = {
+            id: "wallet",
+            method: "subwallet.getmany",
+            params: {
+                wallet_id: 1
             }
+        }
+        fetchSubWallets(subWalletQuery)
 
-            fetchWallet(walletQuery).then((res) => {
-                console.log(res)
-                setWallet(res.data!.result)
-            })
-
-        })
+        setSubWallets(subWallets?.result!)
+        setWallet(wallet?.result!)
 
         setInput("")
-        setReady(true)
-
     }
 
     const onInput = (e: { target: any; }) => {
-        console.log(e)
-
         let num = parseInt(e.target.value)
         if (Number.isNaN(num) && e.target.value == "") {
-            console.log(num)
             return
         }
 
@@ -73,7 +75,6 @@ export function Category(c: ICategory) {
     return <div className={s.wrapper} onClick={onCardClick}>
         <div className={s.title}>{c.title}</div>
         {ready && <>
-
             <div className={s.description}>{c.description}</div>
         </>}
         {!ready && <>

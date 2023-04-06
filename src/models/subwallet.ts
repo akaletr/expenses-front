@@ -1,6 +1,6 @@
-export interface IWallet {
+export interface ISubWallet {
     ID: number
-    user_id: number
+    wallet_id: number
     sum: number
     name: string
     currency: number

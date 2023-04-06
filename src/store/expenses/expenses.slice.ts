@@ -1,13 +1,14 @@
 import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../models/user";
-import {IUserParams} from "../../models/models";
 import {IWallet} from "../../models/wallet";
+import {ISubWallet} from "../../models/subwallet";
 
 interface ExpensesState {
     auth: boolean
     title: string
     user: IUser
-    wallet: IWallet[]
+    wallet: IWallet
+    subWallets: ISubWallet[]
 }
 
 const initialState: ExpensesState = {
@@ -18,9 +19,15 @@ const initialState: ExpensesState = {
         email: "",
         first_name: "",
         last_name: "",
-        wallet_id: 0,
     },
-    wallet: []
+    wallet: {
+        ID: 0,
+        user_id: 0,
+        sum: 0,
+        name: "",
+        currency: 0,
+    },
+    subWallets: []
 }
 
 export const expensesSlice = createSlice({
@@ -33,8 +40,11 @@ export const expensesSlice = createSlice({
         setUser(state, action:PayloadAction<IUser>) {
             state.user = action.payload
         },
-        setWallet(state, action:PayloadAction<IWallet[]>) {
+        setWallet(state, action:PayloadAction<IWallet>) {
             state.wallet = action.payload
+        },
+        setSubWallets(state, action:PayloadAction<ISubWallet[]>) {
+            state.subWallets = action.payload
         },
     }
 })

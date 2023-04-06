@@ -10,7 +10,7 @@ export function Profile() {
         <div> {user?.email}</div>
         <div> {user?.ID}</div>
         <h2>Sum</h2>
-        <div> {wallet[0].name}</div>
-        <div> {wallet[0].sum}</div>
+        <div> {wallet?.name}</div>
+        <div> {wallet?.sum}</div>
     </div>
 }
