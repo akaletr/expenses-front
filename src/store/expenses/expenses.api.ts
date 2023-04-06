@@ -4,6 +4,7 @@ import {IUser} from "../../models/user";
 import {ICategory} from "../../models/category";
 import {IEvent} from "../../models/event";
 import {IWallet} from "../../models/wallet";
+import {ISubWallet} from "../../models/subwallet";
 
 export const expensesApi = createApi({
     reducerPath: "expenses/api",
@@ -46,7 +47,14 @@ export const expensesApi = createApi({
                 body: search
             })
         }),
-        wallets: build.query<Response<IWallet[]>, Request<any>>({
+        subWallets: build.query<Response<ISubWallet[]>, Request<any>>({
+            query: (search) => ({
+                url: "v1",
+                method:"POST",
+                body: search
+            })
+        }),
+        action: build.query<Response<any>, Request<any>>({
             query: (search) => ({
                 url: "v1",
                 method:"POST",
@@ -57,14 +65,16 @@ export const expensesApi = createApi({
 })
 
 export const {
+    useSubWalletsQuery,
     useWalletQuery,
-    useWalletsQuery,
+    useLazySubWalletsQuery,
     useLazyWalletQuery,
-    useLazyWalletsQuery,
     useEventQuery,
     useLazyEventQuery,
     useGetUserQuery,
     useLazyCategoryQuery,
     useCategoryQuery,
     useAuthQuery,
+    useActionQuery,
+    useLazyActionQuery,
 } = expensesApi

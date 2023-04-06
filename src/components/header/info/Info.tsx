@@ -1,7 +1,7 @@
 import {
     useGetUserQuery,
-    useLazyCategoryQuery,
-    useLazyWalletsQuery,
+    useLazyCategoryQuery, useLazySubWalletsQuery,
+    useLazyWalletQuery,
     useWalletQuery
 } from "../../../store/expenses/expenses.api";
 import {useActions} from "../../../hooks/action";
@@ -16,27 +16,37 @@ export function Info() {
         params: {}
     }
     const {isLoading, data: user} = useGetUserQuery(userQuery)
-    const [fetchWallet, {data: wallet}] = useLazyWalletsQuery()
+    const [fetchWallet, {data: wallet}] = useLazyWalletQuery()
+    const [fetchSubWallets, {data: subWallets}] = useLazySubWalletsQuery()
 
 
 
     // const {data: wallet} = useWalletQuery(walletQuery)
     const {setUser} = useActions()
     const {setWallet} = useActions()
+    const {setSubWallets} = useActions()
 
     useEffect(() => {
         setUser(user?.result!)
 
         const walletQuery = {
             id: "wallet",
-            method: "wallet.getmany",
+            method: "wallet.get",
+            params: {}
+        }
+        const subWalletsQuery = {
+            id: "subwallets",
+            method: "subwallet.getmany",
             params: {
-                ID: user?.result.wallet_id
+                wallet_id: 1
             }
         }
         fetchWallet(walletQuery)
+        fetchSubWallets(subWalletsQuery)
+
         setWallet(wallet?.result!)
-    }, [user, wallet])
+        setSubWallets(subWallets?.result!)
+    }, [user, wallet, subWallets])
 
     return <div className={s.wrapper}>
         {isLoading && <>
@@ -47,7 +57,7 @@ export function Info() {
             <div className={s.field}>{user.result.last_name}</div>
         </>}
         {wallet && <>
-            <div className={s.field}>({wallet.result[0].sum})</div>
+            <div className={s.field}>({wallet.result.sum})</div>
         </>}
     </div>
 }
