@@ -1,0 +1,23 @@
+.wrapper {
+    padding: 5px;
+    border: 1px solid  #e5e5e5;
+    margin-right: 10px;
+    width: 150px;
+    border-radius: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.wrapper:hover {
+    background-color: lightgrey;
+}
+
+.sum {
+    font-size: 80%;
+    color: grey;
+}
+
+.active {
+    background-color: #e5e5e5;
+
+}

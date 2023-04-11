@@ -1,12 +1,12 @@
 .wrapper {
-    width: 160px;
+    width: 150px;
     height: 150px;
     background-color: lightgrey;
 
     cursor: pointer;
     text-align: center;
-    margin: 10px;
-    border-radius: 7px;
+    margin-left: 10px;
+    border-radius: 10px;
     overflow: hidden;
     position: relative;
 

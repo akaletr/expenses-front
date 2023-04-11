@@ -3,6 +3,7 @@ import s from "./Category.module.css"
 import {useState} from "react";
 import {useLazyActionQuery, useLazySubWalletsQuery, useLazyWalletQuery} from "../../../store/expenses/expenses.api";
 import {useActions} from "../../../hooks/action";
+import {useAppSelector} from "../../../hooks/redux";
 
 
 export function Category(c: ICategory) {
@@ -12,6 +13,8 @@ export function Category(c: ICategory) {
     const [fetchSubWallets, {data: subWallets}] = useLazySubWalletsQuery()
     const [fetchWallet, {data: wallet}] = useLazyWalletQuery()
     const [fetchAction] = useLazyActionQuery()
+
+    const state = useAppSelector(state => state.expenses.state)
 
     const {setWallet} = useActions()
     const {setSubWallets} = useActions()
@@ -26,7 +29,7 @@ export function Category(c: ICategory) {
             method: "action.event",
             params: {
                 category_id: c.ID,
-                sub_wallet_id: 2,
+                sub_wallet_id: state.activeWallet,
                 description: c.title,
                 sum: Number(input)
             }
