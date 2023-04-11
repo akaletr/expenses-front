@@ -1,6 +1,7 @@
 import {useCategoryQuery} from "../../store/expenses/expenses.api";
 import {Category} from "./category/Category";
 import s from "./Categories.module.css"
+import {SubWallets} from "../subwallets/SubWallets";
 
 export function Categories() {
     const query = {
@@ -11,8 +12,13 @@ export function Categories() {
     const {data: categories} = useCategoryQuery(query)
 
 
-    return <div className={s.wrapper}>
-        {categories?.result.map((el) => <Category key={el.ID} {...el} />)}
-        <Category ID={0} title={""} description={""} />
-    </div>
+    return <>
+        <div className={s.wrapper}>
+            <SubWallets/>
+        </div>
+        <div  className={s.wrapper}>
+            {categories?.result.map((el) => <Category key={el.ID} {...el} />)}
+            <Category ID={0} title={""} description={""}/>
+        </div>
+    </>
 }

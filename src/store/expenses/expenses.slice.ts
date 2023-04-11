@@ -2,6 +2,7 @@ import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import {IUser} from "../../models/user";
 import {IWallet} from "../../models/wallet";
 import {ISubWallet} from "../../models/subwallet";
+import {IState} from "../../models/state";
 
 interface ExpensesState {
     auth: boolean
@@ -9,6 +10,7 @@ interface ExpensesState {
     user: IUser
     wallet: IWallet
     subWallets: ISubWallet[]
+    state: IState
 }
 
 const initialState: ExpensesState = {
@@ -27,7 +29,10 @@ const initialState: ExpensesState = {
         name: "",
         currency: 0,
     },
-    subWallets: []
+    subWallets: [],
+    state: {
+        activeWallet: 1
+    }
 }
 
 export const expensesSlice = createSlice({
@@ -45,6 +50,9 @@ export const expensesSlice = createSlice({
         },
         setSubWallets(state, action:PayloadAction<ISubWallet[]>) {
             state.subWallets = action.payload
+        },
+        setState(state, action:PayloadAction<IState>) {
+            state.state = action.payload
         },
     }
 })
