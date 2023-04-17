@@ -1,6 +1,6 @@
 .wrapper {
-    width: 150px;
-    height: 150px;
+    width: 170px;
+    height: 100px;
     background-color: lightgrey;
 
     cursor: pointer;
@@ -10,6 +10,10 @@
     overflow: hidden;
     position: relative;
 
+}
+
+.income {
+    background-color: aquamarine;
 }
 
 .wrapper:hover {

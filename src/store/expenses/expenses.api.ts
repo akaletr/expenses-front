@@ -5,6 +5,8 @@ import {ICategory} from "../../models/category";
 import {IEvent} from "../../models/event";
 import {IWallet} from "../../models/wallet";
 import {ISubWallet} from "../../models/subwallet";
+import {symlink} from "fs";
+
 
 export const expensesApi = createApi({
     reducerPath: "expenses/api",
@@ -54,7 +56,7 @@ export const expensesApi = createApi({
                 body: search
             })
         }),
-        action: build.query<Response<any>, Request<any>>({
+        action: build.query<Response<any>, any>({
             query: (search) => ({
                 url: "v1",
                 method:"POST",
@@ -65,16 +67,9 @@ export const expensesApi = createApi({
 })
 
 export const {
-    useSubWalletsQuery,
-    useWalletQuery,
     useLazySubWalletsQuery,
     useLazyWalletQuery,
-    useEventQuery,
-    useLazyEventQuery,
-    useGetUserQuery,
-    useLazyCategoryQuery,
     useCategoryQuery,
-    useAuthQuery,
     useActionQuery,
     useLazyActionQuery,
 } = expensesApi

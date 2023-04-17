@@ -1,7 +1,7 @@
 import styles from "./SubWallet.module.css"
-import {useAppSelector} from "../../../hooks/redux";
-import {useActions} from "../../../hooks/action";
-import {IState} from "../../../models/state";
+import {useAppSelector} from "../../../../hooks/redux";
+import {useActions} from "../../../../hooks/action";
+import {IState} from "../../../../models/state";
 
 export function SubWallet(el: any) {
     const state = useAppSelector(state => state.expenses.state)
@@ -14,11 +14,10 @@ export function SubWallet(el: any) {
         setState(st)
     }
 
-    if (state.activeWallet == el.sw.ID) {
-        console.log("LOH")
+    if (state.activeWallet === el.sw.ID) {
         return <>
             {el.sw && <div className={`${styles.wrapper} ${styles.active}`} onClick={onSWClick}>
-                <div>
+                <div className={styles.name}>
                     {el.sw.name}
                 </div>
                 <div className={styles.sum}>
@@ -30,7 +29,7 @@ export function SubWallet(el: any) {
 
     return <>
         {el.sw && <div className={styles.wrapper} onClick={onSWClick}>
-            <div>
+            <div className={styles.name}>
                 {el.sw.name}
             </div>
             <div className={styles.sum}>

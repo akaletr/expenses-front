@@ -1,4 +1,4 @@
-import {useAppSelector} from "../../hooks/redux";
+import {useAppSelector} from "../../../hooks/redux";
 import {SubWallet} from "./subwallet/SubWallet";
 import styles from "./SubWallets.module.css"
 
