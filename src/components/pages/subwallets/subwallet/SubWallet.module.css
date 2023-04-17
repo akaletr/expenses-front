@@ -2,7 +2,8 @@
     padding: 5px;
     border: 1px solid  #e5e5e5;
     margin-right: 10px;
-    width: 150px;
+    width: 170px;
+    height: 110px;
     border-radius: 10px;
     cursor: pointer;
     user-select: none;
@@ -12,8 +13,12 @@
     background-color: lightgrey;
 }
 
+.name {
+    font-size: 130%;
+}
+
 .sum {
-    font-size: 80%;
+    font-size: 100%;
     color: grey;
 }
 

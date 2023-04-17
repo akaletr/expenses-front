@@ -10,6 +10,7 @@ interface ExpensesState {
     user: IUser
     wallet: IWallet
     subWallets: ISubWallet[]
+    events: any
     state: IState
 }
 
@@ -30,6 +31,7 @@ const initialState: ExpensesState = {
         currency: 0,
     },
     subWallets: [],
+    events: [],
     state: {
         activeWallet: 1
     }
@@ -50,6 +52,9 @@ export const expensesSlice = createSlice({
         },
         setSubWallets(state, action:PayloadAction<ISubWallet[]>) {
             state.subWallets = action.payload
+        },
+        setEvents(state, action:PayloadAction<any>) {
+            state.events = action.payload
         },
         setState(state, action:PayloadAction<IState>) {
             state.state = action.payload
